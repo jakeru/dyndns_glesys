@@ -91,7 +91,11 @@ if [ -z "$GLESYS_TOKEN" ]; then
   exit 1
 fi
 
-show_interfaces="show interfaces"
+# Use the vyatta command wrapper in order to run the show command, like
+# described here:
+# https://help.ubnt.com/hc/en-us/articles/204976164-EdgeRouter-How-to-run-operational-mode-command-from-scripts-
+run=/opt/vyatta/bin/vyatta-op-cmd-wrapper
+show_interfaces="$run show interfaces"
 
 # Find the line beginning with eth0,
 # Extract the second column and get the part of the IP address before
